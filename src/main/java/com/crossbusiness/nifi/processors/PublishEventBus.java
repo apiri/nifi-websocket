@@ -148,7 +148,6 @@ public class PublishEventBus extends AbstractProcessor {
             final Map<String, String> attributes = new HashMap<>();
             attributes.put("eventbus.address", outboundAddress);
             flowFile = session.putAllAttributes(flowFile, attributes);
-            session.getProvenanceReporter().receive(flowFile, outboundAddress, "sent message to eventBus", stopWatch.getElapsed(TimeUnit.MILLISECONDS));
             getLogger().info("Successfully sent {} ({}) to EventBuss in {} millis", new Object[]{flowFile, flowFile.getSize(), stopWatch.getElapsed(TimeUnit.MILLISECONDS)});
             session.transfer(flowFile, REL_SUCCESS);
         } catch (ProcessException pe) {
